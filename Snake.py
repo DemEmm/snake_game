@@ -15,7 +15,7 @@ class Snake:
         self.head_cord_x = round(self.snake_body[len(self.snake_body) - 1].position()[0])
         self.head_cord_y = round(self.snake_body[len(self.snake_body) - 1].position()[1])
         self.last_tail = self.snake_body[0].position()
-
+        self.game_on = True
     def move(self):
         for index in range(0, len(self.snake_body) - 1):
             self.snake_body[index].setpos(self.snake_body[index + 1].pos())
@@ -33,13 +33,14 @@ class Snake:
         self.wind_frame = screen.window_width() / 2
         if abs(self.head_cord_x) >= self.wind_frame or abs(self.head_cord_y) >= self.wind_frame:
             print("game over")
-            return False
+            self.game_on = False
         else:
             for index in range(len(self.snake_body) - 2):
                 if self.head_cord_x == round(self.snake_body[index].pos()[0]) and self.head_cord_y == round(self.snake_body[index].pos()[1]):
                     print("game over")
-                    return False
-            return True
+                    self.game_on = False
+                else:
+                    self.game_on = True
 
     def right(self):
         self.snake_body[len(self.snake_body) - 1].right(90)
