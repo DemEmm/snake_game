@@ -2,7 +2,7 @@ from turtle import Turtle
 
 
 class ScoreBoard:
-    def __init__(self,screen,snake):
+    def __init__(self, screen, snake):
         self.text_screen = Turtle()
         self.text_screen.penup()
         self.text_screen.color("white")
@@ -13,11 +13,15 @@ class ScoreBoard:
         self.text_screen.write(f"Score: {self.Score}", False, "center", font=self.style)
         self.screen = screen
         self.snake = snake
+
     def score_up(self):
         self.Score += 1
         self.text_screen.clear()
         self.text_screen.write(f"Score: {self.Score}", False, "center", font=self.style)
 
+    def check_wind_size(self):
+        if self.screen.window_width() > 600 or self.screen.window_width() > 600:
+            self.screen.setup(600, 600)
     # def game_end(self):
     #     self.text_screen.clear()
     #     self.text_screen.write(
@@ -65,5 +69,5 @@ class ScoreBoard:
     #     # self.screen.listen()
     #
     #     print("test")
-        # self.text_screen.write(
-        #     f'''test{self.Score}\n''',False, "center", font=self.style)
+    # self.text_screen.write(
+    #     f'''test{self.Score}\n''',False, "center", font=self.style)
