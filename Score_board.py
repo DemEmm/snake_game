@@ -10,9 +10,15 @@ class ScoreBoard:
         self.text_screen.setpos(0, 250)
         self.style = ('Courier', 15, 'italic')
         self.Score = 0
-        self.text_screen.write(f"Score: {self.Score}", False, "center", font=self.style)
+        self.game_on = True
+        self.continue_game = False
+        self.text_screen.write(f"Use arrows and space to Play\nScore: {self.Score}", False, "center", font=self.style)
+
         self.screen = screen
         self.snake = snake
+        self.arrow = Turtle()
+        self.arrow.penup()
+        self.arrow.hideturtle()
 
     def score_up(self):
         self.Score += 1
@@ -22,52 +28,52 @@ class ScoreBoard:
     def check_wind_size(self):
         if self.screen.window_width() > 600 or self.screen.window_width() > 600:
             self.screen.setup(600, 600)
-    # def game_end(self):
-    #     self.text_screen.clear()
-    #     self.text_screen.write(
-    #         f'''Game over, your final Score is: {self.Score}\nPress any key to start a new game...''',
-    #         False, "center", font=self.style)
-    #     self.screen.onkey(fun=self.new_game, key="")
-    #
-    # def new_game(self):
-    #     self.screen.onkey(fun=None, key="")
-    #
-    #     def do():
-    #         if arrow.pos()[1]==285:
-    #             print("up")
-    #             self.snake.game_on = False
-    #         elif arrow.pos()[1]==261:
-    #             print("down")
-    #             self.snake.game_on = True
-    #
-    #     def up():
-    #         self.text_screen.clear()
-    #         self.text_screen.write(f''':New Game\n:Close snake game''',
-    #                                False, "center", font=self.style)
-    #         arrow.setposition(-105, 285)
-    #         self.screen.update()
-    #     def down():
-    #         self.text_screen.clear()
-    #         self.text_screen.write(f''':New Game\n:Close snake game''',
-    #                                False, "center", font=self.style)
-    #         arrow.setposition(-105, 261)
-    #         self.screen.update()
-    #
-    #     self.screen.onkey(fun=do, key="r")
-    #     self.text_screen.clear()
-    #     self.text_screen.write(f''':New Game\n:Close snake game''',
-    #         False, "center", font=self.style)
-    #
-    #     arrow = Turtle()
-    #     arrow.penup()
-    #     arrow.color("white")
-    #     arrow.setpos(-105, 261)
-    #     self.screen.update()
-    #
-    #     self.screen.onkey(fun=up, key="Up")
-    #     self.screen.onkey(fun=down, key="Down")
-    #     # self.screen.listen()
-    #
-    #     print("test")
-    # self.text_screen.write(
-    #     f'''test{self.Score}\n''',False, "center", font=self.style)
+
+    def game_end(self):
+        self.text_screen.clear()
+        self.text_screen.write(
+            f'''Game over, your final Score is: {self.Score}\nPress any key to start a new game...''',
+            False, "center", font=self.style)
+        self.screen.onkey(fun=self.new_game, key="")
+        self.screen.onkey(fun=self.new_game, key="Up")
+        self.screen.onkey(fun=self.new_game, key="Down")
+        self.screen.onkey(fun=self.new_game, key="space")
+
+    def new_game(self):
+        self.screen.onkey(fun=None, key="")
+        self.create_arrow()
+
+        self.text_screen.clear()
+        self.text_screen.write(f''':New Game\n:Close snake game''', False, "center", font=self.style)
+
+        self.screen.onkey(fun=self.do, key="space")
+        self.screen.onkey(fun=self.up, key="Up")
+        self.screen.onkey(fun=self.down, key="Down")
+
+    def create_arrow(self):
+        self.arrow.color("white")
+        self.arrow.setpos(-105, 261)
+        self.arrow.showturtle()
+        self.screen.update()
+
+    def do(self):
+        if self.arrow.pos()[1] == 285:
+            print("up")
+            self.continue_game = True
+
+            self.snake.game_on = True
+        elif self.arrow.pos()[1] == 261:
+            print("down")
+            self.game_on = False
+
+    def up(self):
+        self.text_screen.clear()
+        self.text_screen.write(f''':New Game\n:Close snake game''', False, "center", font=self.style)
+        self.arrow.setposition(-105, 285)
+        self.screen.update()
+
+    def down(self):
+        self.text_screen.clear()
+        self.text_screen.write(f''':New Game\n:Close snake game''', False, "center", font=self.style)
+        self.arrow.setposition(-105, 261)
+        self.screen.update()

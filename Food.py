@@ -17,8 +17,9 @@ class Food:
         self.cord_y = round(self.food.position()[1])
 
     def new_food(self):
-        rand_pos_x = random.randrange(int(-(self.food_screen.window_width() / 2.5)), int((self.food_screen.window_width() / 2.5)), 20)
-        rand_pos_y = random.randrange(int(-(self.food_screen.window_width() / 2.5)), int((self.food_screen.window_width() / 2.5)), 20)
+        board_limit_x_y = (self.food_screen.window_width()/2)-20
+        rand_pos_x = random.randrange(int(-board_limit_x_y), int(board_limit_x_y), 20)
+        rand_pos_y = random.randrange(int(-board_limit_x_y), int(board_limit_x_y), 20)
         self.food.setpos((rand_pos_x, rand_pos_y))
         self.cord_x = round(self.food.position()[0])
         self.cord_y = round(self.food.position()[1])
