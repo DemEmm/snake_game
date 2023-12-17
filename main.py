@@ -54,7 +54,7 @@ while text_board.game_on:
             snake_body = snake.snake_body
             continue_game = False
             text_board.Score = 0
-            text_board.text_screen.clear()
+            text_board.clear()
             text_board.arrow.hideturtle()
             my_screen.update()
             text_board.continue_game = False
